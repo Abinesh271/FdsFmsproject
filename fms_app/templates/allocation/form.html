@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Allocate Subject | FMS
+{% endblock %}
+
+{% block page_heading %}
+    Allocate Subject
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/allocation/allocation.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="allocation-page">
+
+    <div class="allocation-title">
+        Allocate Subject
+    </div>
+
+    <p class="text-muted mb-4">
+        Select the faculty and subject. The system checks department
+        matching and updates workload automatically.
+    </p>
+
+    <form method="post" class="allocation-form card p-4">
+         {% csrf_token %}
+
+
+        {% if form.non_field_errors %}
+
+            <div class="allocation-error alert alert-danger">
+                {{ form.non_field_errors }}
+            </div>
+
+        {% endif %}
+
+
+        <div class="allocation-fields row g-3">
+
+            {% for field in form %}
+
+                <div class="allocation-field col-md-6">
+
+                    <label class="form-label">
+                        {{ field.label }}
+                    </label>
+
+                    {{ field }}
+
+                    {% for error in field.errors %}
+
+                        <div class="field-error text-danger small">
+                            {{ error }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="allocation-actions mt-4">
+
+            <button type="submit" class="save-allocation-btn btn btn-primary">
+
+                <i class="bi bi-check2"></i>
+                Save Allocation
+            </button>
+
+            <a href="{% url 'allocation_list' %}"
+                class="cancel-btn btn btn-light"> Cancel </a>
+        </div>
+    </form>
+
+
+
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+    <script src="{% static 'js/allocation/allocation.js' %}"></script>
+{% endblock %}

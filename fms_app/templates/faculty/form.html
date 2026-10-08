@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+
+{{ title}} | FMS
+
+{% endblock %}
+
+{% block page_heading %}
+{{ title }}
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/faculty/faculty.css' %}">
+
+{% block content %}
+
+<div class="form-page">
+    <div class="page-title mb-1">{{ title }}</div>
+
+    <p class="text-muted mb-4"> Enter the faculty information carefully.
+        Required fields are validated before saving.</p>
+    <form method="post"  enctype="multipart/form-data" class="card p-4">
+
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger">
+            {{ form.non_field_errors}}
+        </div>
+        {% endif %}
+
+        <div class="row g-3">
+
+            {% for field in form %}
+
+            <div class="col-md-6 {% if field.name == 'address' %} col-12{% endif %}">
+             <label class="form-label">
+                        {{ field.label }}
+
+                        {% if field.field.required %}
+                            <span class="text-danger">*</span>
+                        {% endif %}
+                    </label>
+
+                    {{ field }}
+
+                    {% for error in field.errors %}
+                        <div class="text-danger small mt-1">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+        <div class="mt-4 d-flex gap-2">
+
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-check2-circle"></i>
+                {{ button|default:"Save" }}
+            </button>
+
+            <a href="{% url 'faculty_list' %}"
+               class="btn btn-light">
+                Cancel
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{%  static 'js/faculty/faculty.js' %}"></script>
+{% endblock %}

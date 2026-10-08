@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Allocation | FMS {% endblock %}
+{% block page_heading %}
+Subject Allocation
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/allocation/allocation.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+<div class="allocation-header">
+
+    <div>
+        <div class="title">Subject Allocation</div>
+        <p class="text-muted">Assign subjects to faculty by department, semester and academic year.</p>
+    </div>
+
+    <a href="{% url 'allocation_add' %}" class="btn btn-primary">
+        <i class="bi bi-diagram-3"></i>
+    </a>
+</div>
+
+<form class="card card-body filter-box mb-3" method="get">
+
+    <div class="col-g-2">
+
+        <div class="col-md-4">
+
+            <select name="department" class="form-select">
+
+                <option value="">All departments</option>
+                 {% for d in departments %}
+                <option value="{{ d.id }}"
+                    {% if selected_department == d.id|stringformat:'s' %}selected{% endif %}>
+                    {{ d.code }} - {{ d.name }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <select name="semester" class="form-select">
+                <option value="">All semesters</option>
+
+                {% for n in '12345678' %}
+                <option value="{{ n }}"
+                    {% if selected_semester == n %}selected{% endif %}>
+                    Semester {{ n }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-3">
+
+            <input name="academic_year"
+            value="{{ selected_year}}" class="form-control" placeholder="Academic year e.g. 2026-27">
+        </div>
+
+        <div class="col-md-3"> 
+            <button class="btn btn-outline-primary w-100">Filter</button>
+        </div>
+
+
+
+    </div>
+
+</form>
+<div class="card">
+<div class="table-responsive">
+    <table class="table align-middle mb-0">
+        <thead>
+            <tr>
+                <th>Faculty</th>
+                <th>Subject</th>
+                <th>Department</th>
+                <th>Semester</th>
+                <th>Academic</th>
+                <th>Hours/Week</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+             {% for a in allocations %}
+
+                <tr>
+
+                    <td>
+                        {{ a.faculty.name }}
+                    </td>
+
+                    <td>
+                        <strong>{{ a.subject.subject_code }}</strong>
+                        <small class="d-block text-muted">
+                            {{ a.subject.subject_name }}
+                        </small>
+                    </td>
+
+                    <td>
+                        {{ a.department.code }}
+                    </td>
+
+                    <td>
+                        {{ a.semester }}
+                    </td>
+
+                    <td>
+                        {{ a.academic_year }}
+                    </td>
+
+                    <td>
+                        {{ a.hours_per_week }}
+                    </td>
+
+                    <td>
+                        <span class="badge text-bg-success">
+                            {{ a.status }}
+                        </span>
+                    </td>
+
+                    <td>
+                        <form
+                            method="post"
+                            action="{% url 'allocation_delete' a.pk %}"
+                            class="delete-form">
+
+                            {% csrf_token %}
+
+                            <button class="btn btn-sm btn-light text-danger">
+                                <i class="bi bi-trash"></i>
+                            </button>
+
+                        </form>
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                    <td colspan="8" class="text-center py-5 text-muted">
+                        No allocations found.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+
+        </tbody>
+    </table>
+
+
+</div>
+
+
+</div>
+
+{% endblock %}
+{% block extra_js %}
+<script src="{% static 'js/allocation/allocation.js' %}"></script>
+{% endblock %}

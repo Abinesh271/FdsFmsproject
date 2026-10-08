@@ -1,0 +1,244 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Dashboard | FMS
+{% endblock %}
+
+{% block page_heading %}
+    Dashboard
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/dashboard/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-header d-flex flex-wrap justify-content-between align-items-center mb-4">
+
+    <div>
+        <div class="dashboard-title">Welcome back,{{ request.user.first_name|default:request.user.username }}</div>
+        <p class="text-muted mb-0">
+             Monitor faculty, workload, leave and performance from one place.
+        </p>
+    </div>
+</div>
+
+{% if role == 'FACULTY' and own_faculty %}
+
+<div class="faculty-alert alert alert-info d-flex justify-content-between align-items-center">
+
+    <span>
+        <i class="bi bi-person-badge"></i>
+        You are signed in as faculty.
+    </span>
+
+    <a href="{% url 'faculty_detail' own_faculty.pk %}" class="profile-btn btn btn-sm btn-primary">View My Profile</a>
+</div>
+
+{% endif %}
+
+<div class="dashboard-stats row g-3 mb-4">
+
+    <div class="col-6 col-xl-2">
+        <div class="stat-box">
+            <div class="stat-icon">
+                <i class="bi bi-people"></i>
+            </div>
+            <small>Total Faculty</small>
+            <h3>{{ total_faculty }}</h3>
+        </div>
+    </div>
+
+
+    <div class="col-6 col-xl-2">
+        <div class="stat-box">
+            
+            <div class="stat-icon">
+                <i class="bi bi-person-check"></i>
+            </div>
+
+            <small>Active Faculty</small>
+            <h3>{{ active_faculty }}</h3>
+        </div>
+    </div>
+
+
+    <div class="col-6 col-xl-2">
+        <div class="stat-box">
+
+            <div class="stat-icon">
+                <i class="bi bi-building"></i>
+            </div>
+
+            <small>Departments</small>
+            <h3>{{ departments }}</h3>
+        </div>
+    </div>
+
+    <div class="col-6 col-xl-2">
+        <div class="stat-box">
+            <div class="stat-icon">
+                <i class="bi bi-book"></i>
+            </div>
+
+            <small>Subjects</small>
+            <h3>{{ subjects }}</h3>
+        </div>
+    </div>
+
+
+    <div class="col-6 col-xl-2">
+        <div class="stat-box">
+            <div class="stat-icon">
+                <i class="bi bi-calendar-event"></i>
+            </div>
+
+            <small>Pending Leave</small>
+            <h3>{{ pending_leaves }}</h3>
+        </div>
+    </div>
+
+    <div class="col-6 col-xl-2">
+        <div class="stat-bax">
+            <div class="stat-icon">
+                <i class="bi bi-diagram-3"></i>
+            </div>
+
+            <small>Allocations</small>
+            <h3>{{ allocations }}</h3>
+        </div>
+    </div>
+</div> 
+
+<!-- dashboard details -->
+
+<div class="dashboard-content row g-4">
+
+    <!-- recent evalutions -->
+
+    <div class="col-lg-7">
+
+        <div class="evaluation-card card h-100" >
+
+            <div class="card-header bg-white d-flex justify-content-between">
+
+                <strong>Recent Evalutions</strong>
+                <a href="{% url 'performance_list' %}"
+                    class="small"></a>
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="evaluation-table table align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>Faculty</th>
+                            <th>Period</th>
+                            <th>Score</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        
+                        {% for item in recent_evaluations %}
+
+                        <tr>
+
+                            <td>
+                                {{ item.faculty.name }}
+                            </td>
+
+                            <td>
+                                {{ item.evaluation_period }}
+                            </td>
+
+                            <td>
+                                {{ item.total_score }}/100
+                            </td>
+
+                            <td>
+                                <span class="rating-badge badge text-bg-success">
+                                    {{ item.rating }}
+                                </span>
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td
+                                colspan="4"
+                                class="text-center text-muted py-4"
+                            >
+                                No evaluations yet.
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- workload -->
+
+    <div class="col-lg-5">
+
+        <div class="workload-card card h-100">
+            <div class="card-headef bg-white">
+
+                <strong>
+                    High Workload Faculty
+                </strong>
+            </div>
+
+            <div class="card-body">
+                 {% for row in high_workload %}
+
+                 <div class="workload-item">
+                    <div>
+                        <strong>
+                             {{ row.name }}
+                        </strong>
+
+                        <div class="small text-muted">
+                            {{ row.department.name }}
+                        </div>
+
+                    </div>
+
+                     <span class="workload-badge badge text-bg-warning">
+                        High workload
+                    </span>
+
+
+                 </div>
+
+                  {% empty %}
+                   <p class="text-muted mb-0">
+                    No faculty above 20 hours/week.
+                </p>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+    <script src="{% static 'js/dashboard/dashboard.js' %}"></script>
+{% endblock %}

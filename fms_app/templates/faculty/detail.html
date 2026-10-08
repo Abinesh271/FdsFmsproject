@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ faculty.name }} | FMS
+{% endblock %}
+
+{% block page_heading %}
+    Faculty Details
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/faculty/faculty.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-between align-items-center flex-wrap mb-3">
+
+    <div>
+        <h2 class="page-title">{{ faculty.name }}</h2>
+
+        <p class="text-muted">
+            {{ faculty.faculty_id }} · {{ faculty.department.name }}
+        </p>
+    </div>
+
+    <div>
+        <a href="{% url 'faculty_edit' faculty.pk %}" class="btn btn-primary">
+            <i class="bi bi-pencil"></i>
+            Edit
+        </a>
+
+        <a href="{% url 'faculty_list' %}" class="btn btn-light ms-1">
+            Back
+        </a>
+    </div>
+
+</div>
+
+
+<div class="row g-4">
+
+    <!-- Faculty information -->
+    <div class="col-lg-5">
+
+        <div class="card p-4">
+
+            <div class="profile-top">
+
+                {% if faculty.profile_photo %}
+                    <img src="{{ faculty.profile_photo.url }}" alt="{{ faculty.name }}">
+                {% else %}
+                    <div class="big-avatar">
+                        {{ faculty.name|first }}
+                    </div>
+                {% endif %}
+
+                <div>
+                    <h4 class="mb-1">
+                        {{ faculty.name }}
+                    </h4>
+
+                    <div class="text-muted">
+                        {{ faculty.designation }}
+                    </div>
+
+                    <span class="badge text-bg-success mt-2">
+                        {{ faculty.status }}
+                    </span>
+                </div>
+
+            </div>
+
+            <hr>
+
+            <div class="detail-grid">
+
+                <div>
+                    <small>Department</small>
+                    <strong>{{ faculty.department.name }}</strong>
+                </div>
+
+                <div>
+                    <small>Email</small>
+                    <strong>{{ faculty.email }}</strong>
+                </div>
+
+                <div>
+                    <small>Phone</small>
+                    <strong>{{ faculty.phone }}</strong>
+                </div>
+
+                <div>
+                    <small>Employment</small>
+                    <strong>{{ faculty.employment_type }}</strong>
+                </div>
+
+                <div>
+                    <small>Joining Date</small>
+                    <strong>{{ faculty.joining_date }}</strong>
+                </div>
+
+                <div>
+                    <small>Experience</small>
+                    <strong>{{ faculty.experience }} years</strong>
+                </div>
+
+            </div>
+
+            <div class="mt-3">
+
+                <small class="text-muted">
+                    Address
+                </small>
+
+                <p class="mb-0">
+                    {{ faculty.address|default:"Not provided" }}
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Qualifications and subject allocation -->
+    <div class="col-lg-7">
+
+        <!-- Qualifications -->
+        <div class="card mb-3">
+
+            <div class="card-header bg-white">
+                <strong>Qualifications</strong>
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="table mb-0">
+
+                    <thead>
+                        <tr>
+                            <th>Degree</th>
+                            <th>Specialization</th>
+                            <th>Institution</th>
+                            <th>Year</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for q in qualifications %}
+
+                            <tr>
+                                <td>{{ q.degree }}</td>
+                                <td>{{ q.specialization }}</td>
+                                <td>{{ q.institution }}</td>
+                                <td>{{ q.year }}</td>
+                            </tr>
+
+                        {% empty %}
+
+                            <tr>
+                                <td colspan="4" class="text-muted text-center">
+                                    No qualifications.
+                                </td>
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- Subject allocation -->
+        <div class="card">
+
+            <div class="card-header bg-white">
+                <strong>Current Subject Allocation</strong>
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="table mb-0">
+
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Semester</th>
+                            <th>Hours/Week</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for a in allocations %}
+
+                            <tr>
+                                <td>{{ a.subject.subject_name }}</td>
+                                <td>{{ a.semester }}</td>
+                                <td>{{ a.hours_per_week }}</td>
+                            </tr>
+
+                        {% empty %}
+
+                            <tr>
+                                <td colspan="3" class="text-muted text-center">
+                                    No allocations.
+                                </td>
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+    <script src="{% static 'js/faculty/faculty.js' %}"></script>
+{% endblock %}

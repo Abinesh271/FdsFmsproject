@@ -1,0 +1,272 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Faculty | FMS
+{% endblock %}
+
+{% block page_heading %}
+    Faculty Profiles
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/faculty/faculty.css' %}">
+{% endblock %}
+
+{% block content %}
+ <div class="d-flex flex-wrap justify-content-between gap-2 mb-3">
+
+    <div>
+         <div class="page-title">Faculty Profiles</div>
+
+    <p class="text-muted">Search, filter and manage faculty master records.</p>
+</div>
+
+<a href="{% url 'faculty_add' %}" class="btn-primary"> <i class="bi bi-person-plus"></i>Add Faculty</a>
+   
+ </div>
+
+ <!-- search and filter -->
+  <form class="card card-body mb-3" method="get">
+    <div class="row g-2">
+
+        <div class="col-lg-4">
+            <input type="text"
+            name="q" value="{{ q }}" class="form-control" placeholder="Search name, ID or email">
+        </div>
+
+        <div class="col-lg-3">
+            <select name="department" class="form-select">
+                <option value="">All departments</option>
+
+                {% for d in departments %}
+                    <option
+                        value="{{ d.id }}"
+                        {% if request.GET.department == d.id|stringformat:"s" %}
+                            selected
+                        {% endif %}
+                    >
+                        {{ d.code }} - {{ d.name }}
+                    </option>
+                {% endfor %}
+
+
+            </select>
+        </div>
+
+        <div class="col-lg-3">
+            <input type="text" name="designation" value="{{ designation }}" class="form-control" placeholder="Designation">
+        </div>
+
+        <div class="col-lg-2">
+            <select name="status" class="form-select">
+                <option value="">All status</option>
+                <option value="Active"
+                    {% if status == 'Active' %}selected{% endif %}>
+                    Active
+                </option>
+
+                <option value="Inactive"
+                    {% if status == 'Inactive' %}selected{% endif %}>
+                    Inactive
+                </option>
+            </select>
+        </div>
+
+
+    </div>
+
+    <div class="mt-2">
+        <button type="submit" class="btn-primary"><i class="bi bi-search">Apply filters</i></button>
+        <a href="{% url 'faculty_list' %}" class="btn btn-light">Reset</a>
+    </div>
+
+
+  </form>
+
+  <!-- faculty table -->
+
+  <div class="card">
+
+    <div class="table-responsive">
+        <table class="table align-middle mb-0">
+
+            <thead>
+                <tr>
+                    <th>Faculty</th>
+                     <th>Department</th>
+                      <th>Designation</th>
+                       <th>Employment</th>
+                        <th>Status</th>
+                         <th class="text-end">Action</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for f in page %}
+
+                <tr>
+                    <td>
+                        <div class="faculty-name">
+                            {% if f.profile_photo %}
+                            <img
+                                        src="{{ f.profile_photo.url }}"
+                                        alt="{{ f.name }}"
+                                    >
+
+                                {% else %}
+
+                                    <span>
+                                        {{ f.name|first }}
+                                    </span>
+
+                                {% endif %}
+
+
+                                <div>
+
+                                    <strong>
+                                        {{ f.name }}
+                                    </strong>
+
+                                    <small>
+                                        {{ f.faculty_id }} · {{ f.email }}
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            {{ f.department.code }}
+                        </td>
+
+
+                        <td>
+                            {{ f.designation }}
+                        </td>
+
+
+                        <td>
+                            {{ f.employment_type }}
+                        </td>
+
+
+                        <td>
+
+                            <span class="badge
+                                {% if f.status == 'Active' %}
+                                    text-bg-success
+                                {% else %}
+                                    text-bg-secondary
+                                {% endif %}
+                            ">
+                                {{ f.status }}
+                            </span>
+
+                        </td>
+
+
+                        <td class="text-end">
+
+                            <a
+                                href="{% url 'faculty_detail' f.pk %}"
+                                class="btn btn-sm btn-light"
+                                title="View"
+                            >
+                                <i class="bi bi-eye"></i>
+                            </a>
+
+                            <a
+                                href="{% url 'faculty_edit' f.pk %}"
+                                class="btn btn-sm btn-light"
+                                title="Edit"
+                            >
+                                <i class="bi bi-pencil"></i>
+                            </a>
+
+
+                            {% if request.user.is_superuser or request.user.userprofile.role == 'ADMIN' %}
+
+                                <form
+                                    method="post"
+                                    action="{% url 'faculty_delete' f.pk %}"
+                                    class="d-inline delete-form"
+                                >
+
+                                    {% csrf_token %}
+
+                                    <button
+                                        type="submit"
+                                        class="btn btn-sm btn-light text-danger"
+                                        title="Delete"
+                                    >
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+
+                                </form>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                {% empty %}
+
+                    <tr>
+                        <td
+                            colspan="6"
+                            class="text-center py-5 text-muted"
+                        >
+                            No faculty records found.
+                        </td>
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+<!-- pagination -->
+
+  {% if page.paginator.num_pages > 1 %}
+  <div class="p-3 d-flex justify-content-center">
+
+    <nav>
+        <ul class="pagination mb-0">
+           {% for n in page.paginator.page_range %}
+
+           <li
+                            class="page-item
+                            {% if page.number == n %}active{% endif %}"
+                        >
+
+                            <a
+                                class="page-link"
+                                href="?page={{ n }}&q={{ q }}&department={{ request.GET.department }}&designation={{ designation }}&status={{ status }}"
+                            >
+                                {{ n }}
+                            </a>
+
+                        </li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </nav>
+
+  </div>
+ {% endif %}
+  </div>
+  {% endblock %}
+
+
+{% block extra_js %}
+    <script src="{% static 'js/faculty/faculty.js' %}"></script>
+{% endblock %}
