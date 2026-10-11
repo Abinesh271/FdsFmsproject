@@ -1,0 +1,282 @@
+.page-title {
+    color: #1e293b;
+    font-size: 1.65rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.page-title + p {
+    margin-bottom: 0;
+    color: #64748b;
+    font-size: 0.92rem;
+    line-height: 1.6;
+}
+
+/* ---------- Common card styling ---------- */
+
+.card {
+    overflow: hidden;
+    border: 1px solid #e8edf4;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
+}
+
+.card.p-4 {
+    padding: 26px !important;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.btn-primary {
+    color: #ffffff;
+    background-color: #2563eb;
+    border-color: #2563eb;
+    padding: 9px 15px;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    color: #ffffff;
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+.btn-light {
+    color: #334155;
+    background-color: #f8fafc;
+    border-color: #e2e8f0;
+}
+
+.btn-light:hover {
+    color: #1e293b;
+    background-color: #f1f5f9;
+    border-color: #cbd5e1;
+}
+
+.btn:focus-visible {
+    outline: 3px solid rgba(59, 130, 246, 0.3);
+    outline-offset: 2px;
+}
+
+/* ---------- Qualification table ---------- */
+
+.table-responsive {
+    width: 100%;
+}
+
+.table {
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+
+.table thead th {
+    padding: 15px 16px;
+    color: #64748b;
+    background-color: #f8fafc;
+    border-bottom: 1px solid #e8edf4;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.table tbody td {
+    padding: 15px 16px;
+    color: #334155;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.88rem;
+}
+
+.table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.table tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+.table tbody td strong {
+    color: #1e293b;
+    font-weight: 600;
+}
+
+/* ---------- Qualification type badge ---------- */
+
+.table .badge {
+    display: inline-block;
+    padding: 6px 10px;
+    color: #475569 !important;
+    background-color: #f1f5f9 !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 0.76rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* ---------- Table action buttons ---------- */
+
+.table td .btn-sm {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    font-size: 0.85rem;
+}
+
+.delete-form {
+    display: inline;
+}
+
+.delete-form button {
+    color: #dc2626;
+}
+
+.delete-form button:hover {
+    color: #b91c1c;
+    background-color: #fef2f2;
+    border-color: #fecaca;
+}
+
+.delete-form button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+/* ---------- Qualification form ---------- */
+
+.form-page {
+    width: 100%;
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.form-page .form-label {
+    display: block;
+    margin-bottom: 7px;
+    color: #334155;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.form-page .form-control,
+.form-page .form-select,
+.form-page input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+.form-page select,
+.form-page textarea {
+    width: 100%;
+    min-height: 43px;
+    padding: 10px 12px;
+    color: #334155;
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-page textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-page input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.85rem;
+}
+
+.form-page .form-control:focus,
+.form-page .form-select:focus,
+.form-page input:focus,
+.form-page select:focus,
+.form-page textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.13);
+}
+
+.form-page input[type="checkbox"],
+.form-page input[type="radio"] {
+    accent-color: #2563eb;
+}
+
+.form-page .text-danger.small {
+    margin-top: 5px;
+    font-size: 0.8rem;
+}
+
+.form-page .alert-danger {
+    border-radius: 8px;
+    font-size: 0.88rem;
+}
+
+.form-page .form-label .text-danger {
+    font-size: 0.85rem;
+}
+
+/* ---------- Responsive layout ---------- */
+
+@media (max-width: 767.98px) {
+    .page-title {
+        font-size: 1.4rem;
+    }
+
+    .card.p-4 {
+        padding: 18px !important;
+    }
+
+    .table thead th,
+    .table tbody td {
+        padding: 12px;
+    }
+
+    .table tbody td {
+        font-size: 0.84rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-page .card.p-4 {
+        padding: 14px !important;
+    }
+
+    .form-page > .d-flex {
+        flex-wrap: wrap;
+    }
+
+    .form-page .mt-4 .btn {
+        min-height: 40px;
+    }
+}
+
+/* ---------- Accessibility ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}

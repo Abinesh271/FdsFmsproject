@@ -1,0 +1,303 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+    color: #1f2937;
+    font-size: 14px;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.app-shell {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+.sidebar {
+    width: 260px;
+    height: 100vh;
+    background-color: #111827;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 22px 14px;
+    overflow-y: auto;
+    transition: 0.3s;
+    z-index: 1040;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 14px;
+    margin-bottom: 12px;
+    font-size: 27px;
+    font-weight: bold;
+    color: white;
+}
+
+.brand i {
+    font-size: 30px;
+    color: #818cf8;
+}
+
+.sidebar .small {
+    font-size: 11px;
+}
+
+
+.side-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 25px;
+}
+
+.side-nav a {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 12px 15px;
+    min-height: 45px;
+    border-radius: 8px;
+    color: #d1d5db;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.side-nav a i {
+    width: 20px;
+    font-size: 17px;
+    text-align: center;
+}
+
+.side-nav a:hover {
+    background-color: #1f2937;
+    color: white;
+    transform: translateX(3px);
+}
+
+.side-nav a.active {
+    background-color: #4f46e5;
+    color: white;
+}
+
+
+.main-area {
+    width: calc(100% - 260px);
+    min-width: 0;
+    margin-left: 260px;
+}
+
+
+.topbar {
+    height: 72px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 28px;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+    border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.topbar strong {
+    font-size: 17px;
+    color: #111827;
+}
+
+.user-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #e0e7ff;
+    color: #4338ca;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.user-box small {
+    font-size: 12px;
+}
+
+.page-content {
+    padding: 28px;
+    min-height: calc(100vh - 72px);
+}
+
+
+.card {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+.card-header {
+    background-color: white;
+    padding: 16px 20px;
+    font-weight: 600;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.btn {
+    border-radius: 7px;
+}
+
+.btn-primary {
+    background-color: #4f46e5;
+    border-color: #4f46e5;
+}
+
+.btn-primary:hover {
+    background-color: #4338ca;
+    border-color: #4338ca;
+}
+
+
+.form-control,
+.form-select {
+    min-height: 40px;
+    border-radius: 7px;
+    border-color: #d1d5db;
+    font-size: 14px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #818cf8;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+
+.table {
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+
+.table thead th {
+    background-color: #f9fafb;
+    color: #4b5563;
+    padding: 13px 15px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.table tbody td {
+    padding: 13px 15px;
+}
+
+.table tbody tr:hover td {
+    background-color: #f9fafb;
+}
+
+
+.alert {
+    border: none;
+    border-radius: 9px;
+    margin-bottom: 20px;
+}
+
+
+.sidebar-overlay {
+    display: none;
+}
+
+
+@media (max-width: 991px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+    }
+
+    .main-area {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .sidebar-overlay.show {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1030;
+    }
+
+    .topbar {
+        padding: 12px 18px;
+    }
+
+    .page-content {
+        padding: 20px;
+    }
+}
+
+
+@media (max-width: 576px) {
+    .sidebar {
+        width: 270px;
+        max-width: 85%;
+    }
+
+    .topbar {
+        padding: 10px 12px;
+        gap: 8px;
+    }
+
+    .topbar strong {
+        font-size: 14px;
+    }
+
+    .user-box {
+        gap: 8px;
+    }
+
+    .avatar {
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+    }
+
+    .page-content {
+        padding: 14px;
+    }
+
+    .card-body {
+        padding: 14px;
+    }
+}
+
+
+

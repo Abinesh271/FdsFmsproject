@@ -1,0 +1,440 @@
+
+.page-title {
+    color: #1e293b;
+    font-size: 1.65rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.page-title + p,
+.text-muted {
+    line-height: 1.6;
+}
+
+.page-title + p {
+    margin-bottom: 0;
+}
+
+/* ---------- Common cards ---------- */
+
+.card {
+    border: 1px solid #e8edf4;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
+}
+
+.card-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #edf0f5;
+    border-radius: 12px 12px 0 0 !important;
+}
+
+.card-header strong {
+    color: #1e293b;
+    font-size: 0.98rem;
+    font-weight: 650;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 9px 15px;
+    color: #ffffff;
+    background-color: #2563eb;
+    border: 1px solid #2563eb;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+    color: #ffffff;
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+.btn-light {
+    color: #334155;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+}
+
+.btn-light:hover {
+    color: #1e293b;
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+}
+
+.btn:focus-visible,
+.page-link:focus-visible {
+    outline: 3px solid rgba(59, 130, 246, 0.3);
+    outline-offset: 2px;
+}
+
+/* ---------- Faculty profile details ---------- */
+
+.profile-top {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    min-width: 0;
+}
+
+.profile-top img,
+.big-avatar {
+    flex-shrink: 0;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+}
+
+.profile-top img {
+    object-fit: cover;
+    border: 3px solid #eff6ff;
+    background: #f1f5f9;
+}
+
+.big-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1d4ed8;
+    background: #dbeafe;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.profile-top h4 {
+    color: #1e293b;
+    font-size: 1.2rem;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.profile-top .text-muted {
+    font-size: 0.88rem;
+}
+
+.profile-top .badge {
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.76rem;
+    font-weight: 600;
+}
+
+/* ---------- Faculty information grid ---------- */
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 18px;
+}
+
+.detail-grid > div {
+    min-width: 0;
+}
+
+.detail-grid small {
+    display: block;
+    margin-bottom: 6px;
+    color: #64748b;
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+
+.detail-grid strong {
+    display: block;
+    color: #334155;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.card hr {
+    margin: 22px 0;
+    border-color: #e8edf4;
+    opacity: 1;
+}
+
+/* ---------- Qualifications and allocations tables ---------- */
+
+.table-responsive {
+    border-radius: inherit;
+}
+
+.table {
+    vertical-align: middle;
+}
+
+.table thead th {
+    padding: 14px 16px;
+    color: #64748b;
+    background: #f8fafc;
+    border-bottom: 1px solid #e8edf4;
+    font-size: 0.78rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.table tbody td {
+    padding: 14px 16px;
+    color: #334155;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.88rem;
+}
+
+.table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.table tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+.table .badge {
+    padding: 6px 9px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+/* ---------- Faculty list profile cell ---------- */
+
+.faculty-name {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 220px;
+}
+
+.faculty-name img,
+.faculty-name > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+}
+
+.faculty-name img {
+    object-fit: cover;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+}
+
+.faculty-name > span {
+    color: #1d4ed8;
+    background: #dbeafe;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.faculty-name > div {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+
+.faculty-name strong {
+    color: #1e293b;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.faculty-name small {
+    color: #64748b;
+    font-size: 0.78rem;
+    overflow-wrap: anywhere;
+}
+
+/* ---------- Search and filter form ---------- */
+
+form.card.card-body {
+    padding: 18px;
+}
+
+.form-control,
+.form-select {
+    min-height: 42px;
+    color: #334155;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.88rem;
+}
+
+.form-control::placeholder {
+    color: #94a3b8;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.13);
+}
+
+/* ---------- Faculty add/edit form ---------- */
+
+.form-page {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.form-page > form.card {
+    padding: 26px !important;
+}
+
+.form-page .form-label {
+    display: block;
+    margin-bottom: 7px;
+    color: #334155;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.form-page textarea.form-control {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-page input[type="file"].form-control {
+    height: auto;
+    padding: 8px;
+}
+
+.form-page input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    accent-color: #2563eb;
+}
+
+.form-page .text-danger.small {
+    font-size: 0.8rem;
+}
+
+.form-page .alert-danger {
+    border-radius: 8px;
+    font-size: 0.88rem;
+}
+
+/* ---------- Pagination ---------- */
+
+.pagination {
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.pagination .page-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    min-height: 36px;
+    color: #334155;
+    border: 1px solid #e2e8f0;
+    border-radius: 7px !important;
+    font-size: 0.85rem;
+}
+
+.pagination .page-item.active .page-link {
+    color: #ffffff;
+    background: #2563eb;
+    border-color: #2563eb;
+}
+
+.pagination .page-item:not(.active) .page-link:hover {
+    color: #1d4ed8;
+    background: #eff6ff;
+}
+
+/* ---------- Delete action ---------- */
+
+.delete-form .btn {
+    min-width: 32px;
+}
+
+.delete-form .btn:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
+/* ---------- Responsive adjustments ---------- */
+
+@media (max-width: 767.98px) {
+    .page-title {
+        font-size: 1.4rem;
+    }
+
+    .profile-top img,
+    .big-avatar {
+        width: 72px;
+        height: 72px;
+    }
+
+    .big-avatar {
+        font-size: 1.65rem;
+    }
+
+    .detail-grid {
+        gap: 18px 12px;
+    }
+
+    .card-header {
+        padding: 14px 16px;
+    }
+
+    .form-page > form.card {
+        padding: 18px !important;
+    }
+
+    .table thead th,
+    .table tbody td {
+        padding: 12px;
+    }
+}
+
+@media (max-width: 420px) {
+    .detail-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .profile-top {
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .profile-top img,
+    .big-avatar {
+        width: 60px;
+        height: 60px;
+    }
+
+    .profile-top h4 {
+        font-size: 1.05rem;
+    }
+
+    .form-page > form.card {
+        padding: 14px !important;
+    }
+}

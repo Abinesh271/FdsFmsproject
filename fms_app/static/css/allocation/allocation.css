@@ -1,0 +1,272 @@
+.allocation-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.allocation-title,
+.allocation-header .title {
+    font-size: 26px;
+    font-weight: 600;
+    color: #212529;
+    margin-bottom: 10px;
+}
+
+.allocation-page p,
+.allocation-header p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+
+.allocation-form {
+    background-color: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.allocation-fields {
+    margin-top: 5px;
+}
+
+.allocation-field label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #343a40;
+    margin-bottom: 8px;
+}
+
+.allocation-field input,
+.allocation-field select,
+.allocation-field textarea {
+    width: 100%;
+    border: 1px solid #ced4da;
+    border-radius: 7px;
+    padding: 10px 12px;
+    font-size: 14px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.allocation-field input:focus,
+.allocation-field select:focus,
+.allocation-field textarea:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.12);
+    outline: none;
+}
+
+.allocation-error {
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.field-error {
+    margin-top: 5px;
+    font-size: 12px;
+}
+
+.allocation-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.save-allocation-btn,
+.cancel-btn {
+    border-radius: 7px;
+    padding: 9px 16px;
+    font-size: 14px;
+}
+
+.save-allocation-btn {
+    font-weight: 500;
+}
+
+.cancel-btn {
+    border: 1px solid #dee2e6;
+}
+
+
+.allocation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.allocation-header .title {
+    margin-bottom: 8px;
+}
+
+.allocation-header p {
+    margin-bottom: 0;
+}
+
+.allocation-header > a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 42px;
+    min-height: 42px;
+    border-radius: 8px;
+}
+
+
+
+.filter-box {
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 18px;
+}
+
+.col-g-2 {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    align-items: end;
+}
+
+.filter-box .form-select,
+.filter-box .form-control {
+    min-height: 42px;
+    border-radius: 7px;
+    font-size: 14px;
+}
+
+.filter-box .btn {
+    min-height: 42px;
+    border-radius: 7px;
+}
+
+
+.card {
+    border-radius: 10px;
+}
+
+.table-responsive {
+    border-radius: 10px;
+}
+
+.table {
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    color: #495057;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    padding: 15px 12px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.table tbody td {
+    padding: 14px 12px;
+    font-size: 14px;
+    color: #343a40;
+}
+
+.table tbody tr:hover {
+    background-color: #f8faff;
+}
+
+.table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.table td strong {
+    font-weight: 600;
+}
+
+.table td small {
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.table .badge {
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 6px;
+}
+
+
+
+.table .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid #e5e7eb;
+    border-radius: 7px;
+}
+
+.table .btn:hover {
+    background-color: #f1f3f5;
+}
+
+.table .btn.text-danger:hover {
+    color: #ffffff !important;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+
+
+@media (max-width: 768px) {
+    .allocation-page {
+        padding: 12px;
+    }
+
+    .allocation-title,
+    .allocation-header .title {
+        font-size: 22px;
+    }
+
+    .allocation-header {
+        align-items: flex-start;
+    }
+
+    .col-g-2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .table thead th,
+    .table tbody td {
+        padding: 12px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .allocation-page {
+        padding: 8px;
+    }
+
+    .col-g-2 {
+        grid-template-columns: 1fr;
+    }
+
+    .allocation-actions {
+        align-items: stretch;
+    }
+
+    .allocation-actions .btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .allocation-header .title {
+        font-size: 20px;
+    }
+
+    .filter-box {
+        padding: 12px;
+    }
+}
