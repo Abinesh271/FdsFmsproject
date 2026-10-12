@@ -43,19 +43,46 @@ class SubjectForm(BootstrapModelForm):
 
 
 class AllocationForm(BootstrapModelForm):
+
     class Meta:
         model = SubjectAllocation
-        fields = ['faculty', 'subject', 'department', 'semester', 'academic_year', 'hours_per_week', 'status']
+        fields = [
+            'faculty',
+            'subject',
+            'department',
+            'semester',
+            'academic_year',
+            'hours_per_week',
+            'status',
+        ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Show active subjects in the dropdown
+        self.fields['subject'].queryset = Subject.objects.filter(
+            status='Active'
+        )
 
     def clean(self):
         cleaned = super().clean()
+
         faculty = cleaned.get('faculty')
         subject = cleaned.get('subject')
         department = cleaned.get('department')
-        if faculty and subject and faculty.department_id != subject.department_id:
-            raise forms.ValidationError('Faculty and subject must belong to the same department.')
-        if faculty and department and faculty.department_id != department.id:
-            raise forms.ValidationError('Selected department does not match the faculty department.')
+
+        if faculty and subject:
+            if faculty.department_id != subject.department_id:
+                raise forms.ValidationError(
+                    'Faculty and subject must belong to the same department.'
+                )
+
+        if faculty and department:
+            if faculty.department_id != department.id:
+                raise forms.ValidationError(
+                    'Selected department does not match the faculty department.'
+                )
+
         return cleaned
 
 
