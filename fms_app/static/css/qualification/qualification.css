@@ -12,7 +12,7 @@
     line-height: 1.6;
 }
 
-/* ---------- Common card styling ---------- */
+
 
 .card {
     overflow: hidden;
@@ -25,7 +25,7 @@
     padding: 26px !important;
 }
 
-/* ---------- Buttons ---------- */
+
 
 .btn {
     display: inline-flex;
@@ -72,7 +72,7 @@
     outline-offset: 2px;
 }
 
-/* ---------- Qualification table ---------- */
+
 
 .table-responsive {
     width: 100%;
@@ -117,7 +117,6 @@
     font-weight: 600;
 }
 
-/* ---------- Qualification type badge ---------- */
 
 .table .badge {
     display: inline-block;
@@ -131,7 +130,6 @@
     white-space: nowrap;
 }
 
-/* ---------- Table action buttons ---------- */
 
 .table td .btn-sm {
     width: 34px;
@@ -159,7 +157,7 @@
     cursor: wait;
 }
 
-/* ---------- Qualification form ---------- */
+
 
 .form-page {
     width: 100%;
@@ -235,8 +233,6 @@
     font-size: 0.85rem;
 }
 
-/* ---------- Responsive layout ---------- */
-
 @media (max-width: 767.98px) {
     .page-title {
         font-size: 1.4rem;
@@ -270,7 +266,7 @@
     }
 }
 
-/* ---------- Accessibility ---------- */
+
 
 @media (prefers-reduced-motion: reduce) {
     *,

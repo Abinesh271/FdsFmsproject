@@ -1,0 +1,173 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Performance | FMS
+{% endblock %}
+
+{% block page_heading %}
+    Performance Evaluation
+{% endblock %}
+
+
+<!-- CSS file -->
+{% block extra_css %}
+    <link rel="stylesheet"
+          href="{% static 'css/performance/performance.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<!-- Page heading and Create button -->
+<div class="d-flex justify-content-between flex-wrap gap-2 mb-3">
+
+    <div>
+
+        <div class="page-title">
+            Performance Evaluation
+        </div>
+
+        <p class="text-muted">
+            Store evaluation history and calculate an overall score automatically.
+        </p>
+
+    </div>
+
+
+    <!-- Faculty users cannot create evaluations -->
+    {% if request.user.userprofile.role != 'FACULTY' %}
+
+        <a href="{% url 'performance_add' %}"
+           class="btn btn-primary">
+
+            <i class="bi bi-clipboard2-plus"></i>
+            Create Evaluation
+
+        </a>
+
+    {% endif %}
+
+</div>
+
+
+<!-- Evaluation cards -->
+<div class="row g-3">
+
+    {% for e in evaluations %}
+
+        <div class="col-xl-6">
+
+            <div class="card evaluation-card">
+
+                <div class="card-body">
+
+                    <!-- Faculty name and total score -->
+                    <div class="d-flex justify-content-between">
+
+                        <div>
+
+                            <h5>
+                                {{ e.faculty.name }}
+                            </h5>
+
+                            <div class="text-muted small">
+                                {{ e.evaluation_period }} · {{ e.evaluation_date }}
+                            </div>
+
+                        </div>
+
+                        <div class="score">
+                            {{ e.total_score }}
+                            <small>/100</small>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Score progress bar -->
+                    <div class="progress mt-3" style="height:9px">
+
+                        <div class="progress-bar"
+                             style="width:{{ e.total_score }}%">
+                        </div>
+
+                    </div>
+
+
+                    <!-- Rating and evaluator name -->
+                    <div class="d-flex justify-content-between mt-3">
+
+                        <span class="badge text-bg-success">
+                            {{ e.rating }}
+                        </span>
+
+                        <span class="small text-muted">
+                            Evaluator: {{ e.evaluator.username }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- Remarks, if available -->
+                    {% if e.remarks %}
+
+                        <p class="mt-3 mb-0 text-muted">
+                            {{ e.remarks }}
+                        </p>
+
+                    {% endif %}
+
+
+                    <!-- Delete button for non-faculty users -->
+                    {% if request.user.userprofile.role != 'FACULTY' %}
+
+                        <form method="post"
+                              action="{% url 'performance_delete' e.pk %}"
+                              class="delete-form mt-3">
+
+                            {% csrf_token %}
+
+                            <button class="btn btn-sm btn-outline-danger">
+
+                                <i class="bi bi-trash"></i>
+                                Delete
+
+                            </button>
+
+                        </form>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    <!-- Message when there are no evaluations -->
+    {% empty %}
+
+        <div class="col-12">
+
+            <div class="card p-5 text-center text-muted">
+                No evaluations available.
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
+
+
+<!-- JavaScript file -->
+{% block extra_js %}
+    <script src="{% static 'js/performance/performance.js' %}"></script>
+{% endblock %}
+
+Copied

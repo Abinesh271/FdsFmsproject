@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Reports | FMS{% endblock %}
+{% block page_heading %}Reports & Summary{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/reports/reports.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="page-title">Reports & Summary</div>
+
+<p class="text-muted mb-4">
+    A simple management summary based on the live database records.
+</p>
+
+<div class="row g-3 mb-4">
+
+    <div class="col-6 col-lg-3">
+        <div class="report-box">
+            <span>Allocations</span>
+            <strong>{{ allocation_count }}</strong>
+        </div>
+    </div>
+
+    <div class="col-6 col-lg-3">
+        <div class="report-box">
+            <span>Leave Records</span>
+            <strong>{{ leave_count }}</strong>
+        </div>
+    </div>
+
+    <div class="col-6 col-lg-3">
+        <div class="report-box">
+            <span>Evaluations</span>
+            <strong>{{ evaluation_count }}</strong>
+        </div>
+    </div>
+
+</div>
+
+<div class="card">
+
+    <div class="card-header bg-white">
+        <strong>Department-wise Summary</strong>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table mb-0">
+
+            <thead>
+                <tr>
+                    <th>Department</th>
+                    <th>Code</th>
+                    <th>Faculty Count</th>
+                    <th>Subject Count</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for d in department_rows %}
+                <tr>
+                    <td>{{ d.name }}</td>
+                    <td>{{ d.code }}</td>
+                    <td>{{ d.faculty_count }}</td>
+                    <td>{{ d.subject_count }}</td>
+
+                    <td>
+                        {% if d.status %}
+                        <span class="badge text-bg-success">Active</span>
+                        {% else %}
+                        <span class="badge text-bg-secondary">Inactive</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/reports/reports.js' %}"></script>
+{% endblock %}

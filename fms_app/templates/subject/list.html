@@ -1,0 +1,236 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Subjects | FMS
+{% endblock %}
+
+{% block page_heading %}
+    Subject Master
+{% endblock %}
+
+
+<!-- CSS file -->
+{% block extra_css %}
+    <link rel="stylesheet"
+          href="{% static 'css/subject/subject.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<!-- Page heading and Add Subject button -->
+<div class="d-flex justify-content-between flex-wrap gap-2 mb-3">
+
+    <div>
+
+        <div class="page-title">
+            Subjects
+        </div>
+
+        <p class="text-muted">
+            Create and manage academic subjects by department.
+        </p>
+
+    </div>
+
+    <a href="{% url 'subject_add' %}" class="btn btn-primary">
+        <i class="bi bi-plus-lg"></i>
+        Add Subject
+    </a>
+
+</div>
+
+
+
+<form class="card card-body mb-3" method="get">
+
+    <div class="row g-2">
+
+        <!-- Search by subject code or name -->
+        <div class="col-md-5">
+
+            <input
+                name="q"
+                value="{{ q }}"
+                class="form-control"
+                placeholder="Search code or subject name"
+            >
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <select name="department" class="form-select">
+
+                <option value="">
+                    All departments
+                </option>
+
+                {% for d in departments %}
+
+                    <option
+                        value="{{ d.id }}"
+                        {% if selected_department == d.id|stringformat:'s' %}
+                            selected
+                        {% endif %}
+                    >
+                        {{ d.code }} - {{ d.name }}
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+
+        <!-- Filter and Reset buttons -->
+        <div class="col-md-3">
+
+            <button class="btn btn-outline-primary">
+                Filter
+            </button>
+
+            <a href="{% url 'subject_list' %}" class="btn btn-light">
+                Reset
+            </a>
+
+        </div>
+
+    </div>
+
+</form>
+
+
+<!-- Subject table -->
+<div class="card">
+
+    <div class="table-responsive">
+
+        <table class="table align-middle mb-0">
+
+            <thead>
+
+                <tr>
+                    <th>Code</th>
+                    <th>Subject</th>
+                    <th>Department</th>
+                    <th>Semester</th>
+                    <th>Year</th>
+                    <th>Credits</th>
+                    <th>Hours/Week</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for s in subjects %}
+
+                    <tr>
+
+                        <td>
+                            <strong>{{ s.subject_code }}</strong>
+                        </td>
+
+                        <td>
+                            {{ s.subject_name }}
+                        </td>
+
+                        <td>
+                            {{ s.department.code }}
+                        </td>
+
+                        <td>
+                            {{ s.semester }}
+                        </td>
+
+                        <td>
+                            {{ s.academic_year }}
+                        </td>
+
+                        <td>
+                            {{ s.credits }}
+                        </td>
+
+                        <td>
+                            {{ s.hours_per_week }}
+                        </td>
+
+                        <td>
+                            <span class="badge text-bg-success">
+                                {{ s.status }}
+                            </span>
+                        </td>
+
+
+                        <!-- Edit and Delete buttons -->
+                        <td>
+
+                            <a
+                                href="{% url 'subject_edit' s.pk %}"
+                                class="btn btn-sm btn-light"
+                            >
+                                <i class="bi bi-pencil"></i>
+                            </a>
+
+
+                            <!-- Only admin can delete -->
+                            {% if request.user.userprofile.role == 'ADMIN' %}
+
+                                <form
+                                    class="d-inline delete-form"
+                                    method="post"
+                                    action="{% url 'subject_delete' s.pk %}"
+                                >
+
+                                    {% csrf_token %}
+
+                                    <button class="btn btn-sm btn-light text-danger">
+                                        <i class="bi bi-trash"></i>
+                                    </button>
+
+                                </form>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+
+                {% empty %}
+
+                    <tr>
+
+                        <td
+                            colspan="9"
+                            class="text-center py-5 text-muted"
+                        >
+                            No subjects found.
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+<!-- JavaScript file -->
+{% block extra_js %}
+    <script src="{% static 'js/subject/subject.js' %}"></script>
+{% endblock %}

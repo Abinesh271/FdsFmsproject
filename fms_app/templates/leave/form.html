@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Apply Leave | FMS
+{% endblock %}
+
+{% block page_heading %}
+    Apply Leave
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/leave/leave.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="leave-page">
+
+    <div class="leave-title">
+        Apply Leave
+    </div>
+
+    <p class="text-muted mb-4">
+        Choose dates and give a clear reason. The system calculates
+        number of days and checks approved overlap.
+    </p>
+
+
+    <form method="post" class="leave-form card p-4">
+
+        {% csrf_token %}
+
+
+        {% if form.non_field_errors %}
+
+            <div class="leave-error alert alert-danger">
+                {{ form.non_field_errors }}
+            </div>
+
+        {% endif %}
+
+
+        <div class="leave-fields row g-3">
+
+            {% for field in form %}
+
+                <div class="leave-field col-md-6 {% if field.name == 'reason' %}col-12{% endif %}">
+
+                    <label class="form-label">
+                        {{ field.label }}
+                    </label>
+
+                    {{ field }}
+
+                    {% for error in field.errors %}
+
+                        <div class="field-error text-danger small">
+                            {{ error }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <div class="leave-actions mt-4">
+
+            <button
+                type="submit"
+                class="submit-leave-btn btn btn-primary"
+            >
+                <i class="bi bi-send"></i>
+                Submit Leave
+            </button>
+
+            <a
+                href="{% url 'leave_list' %}"
+                class="cancel-leave-btn btn btn-light"
+            >
+                Cancel
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+    <script src="{% static 'js/leave/leave.js' %}"></script>
+{% endblock %}

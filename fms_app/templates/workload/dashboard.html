@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Workload | FMS
+{% endblock %}
+
+{% block page_heading %}
+    Workload Management
+{% endblock %}
+
+
+<!-- CSS file -->
+{% block extra_css %}
+    <link rel="stylesheet"
+          href="{% static 'css/workload/workload.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<!-- Page heading and description -->
+<div class="mb-4">
+
+    <div class="page-title">
+        Workload Management
+    </div>
+
+    <p class="text-muted">
+        Workload is calculated from active subject allocations.
+        It is not manually entered.
+    </p>
+
+</div>
+
+
+<!-- Faculty workload cards -->
+<div class="row g-3">
+
+    {% for row in rows %}
+
+        <div class="col-xl-6">
+
+            <div class="card workload-card">
+
+                <div class="card-body">
+
+                    <!-- Faculty details and total workload -->
+                    <div class="d-flex justify-content-between align-items-start">
+
+                        <div>
+
+                            <h5 class="mb-1">
+                                {{ row.faculty.name }}
+                            </h5>
+
+                            <div class="text-muted small">
+                                {{ row.faculty.faculty_id }}
+                                ·
+                                {{ row.faculty.department.code }}
+                            </div>
+
+                        </div>
+
+                        <div class="total-hours">
+
+                            <strong>
+                                {{ row.total }}
+                            </strong>
+
+                            <span>
+                                hrs/week
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <hr>
+
+
+                    <!-- List of allocated subjects -->
+                    {% for a in row.items %}
+
+                        <div class="allocation-row">
+
+                            <span>
+                                {{ a.subject.subject_code }}
+                                -
+                                {{ a.subject.subject_name }}
+                            </span>
+
+                            <strong>
+                                {{ a.hours_per_week }} hrs
+                            </strong>
+
+                        </div>
+
+                    {% empty %}
+
+                        <p class="text-muted mb-0">
+                            No active allocations.
+                        </p>
+
+                    {% endfor %}
+
+
+                    <!-- Show workload status -->
+                    {% if row.total > 20 %}
+
+                        <div class="alert alert-warning mt-3 mb-0 py-2">
+
+                            <i class="bi bi-exclamation-triangle"></i>
+                            High workload
+
+                        </div>
+
+                    {% elif row.total > 0 %}
+
+                        <div class="alert alert-success mt-3 mb-0 py-2">
+
+                            <i class="bi bi-check-circle"></i>
+                            Workload is within the demo threshold
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    <!-- Displayed when no faculty records are available -->
+    {% empty %}
+
+        <div class="col-12">
+
+            <div class="card p-5 text-center text-muted">
+                No faculty workload data available.
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
+
+
+<!-- JavaScript file -->
+{% block extra_js %}
+    <script src="{% static 'js/workload/workload.js' %}"></script>
+{% endblock %}

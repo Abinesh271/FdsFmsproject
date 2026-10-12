@@ -1,0 +1,251 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Leave | FMS
+{% endblock %}
+
+{% block page_heading %}
+Leave Management
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/leave/leave.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="leave-header d-flex justify-content-between flex-wrap gap-2 mb-3">
+
+    <div>
+
+        <div class="leave-title">
+            Leave Management
+        </div>
+
+        <p class="text-muted">
+            Apply, review, approve and track leave history.
+        </p>
+
+    </div>
+
+
+    <a
+        href="{% url 'leave_add' %}"
+        class="apply-leave-btn btn btn-primary"
+    >
+        <i class="bi bi-calendar-plus"></i>
+        Apply Leave
+    </a>
+
+</div>
+
+
+<!-- Leave Filter -->
+
+<form
+    class="leave-filter card card-body mb-3"
+    method="get"
+>
+
+    <div class="filter-row row g-2">
+
+        <div class="status-filter col-md-4">
+
+            <select
+                name="status"
+                class="status-select form-select"
+            >
+
+                <option value="">
+                    All statuses
+                </option>
+
+                <option value="Pending"
+                    {% if status == 'Pending' %}selected{% endif %}
+                >
+                    Pending
+                </option>
+
+                <option value="Approved"
+                    {% if status == 'Approved' %}selected{% endif %}
+                >
+                    Approved
+                </option>
+
+                <option value="Rejected"
+                    {% if status == 'Rejected' %}selected{% endif %}
+                >
+                    Rejected
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="filter-button col-md-2">
+
+            <button
+                type="submit"
+                class="filter-btn btn btn-outline-primary"
+            >
+                Filter
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
+
+
+<!-- Leave List -->
+
+<div class="leave-list card">
+
+    <div class="table-responsive">
+
+        <table class="leave-table table align-middle mb-0">
+
+            <thead>
+
+                <tr>
+                    <th>Faculty</th>
+                    <th>Type</th>
+                    <th>Dates</th>
+                    <th>Days</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for l in leaves %}
+
+                <tr class="leave-row">
+
+                    <td>
+                        {{ l.faculty.name }}
+                    </td>
+
+                    <td>
+                        {{ l.leave_type }}
+                    </td>
+
+                    <td>
+                        {{ l.from_date }} → {{ l.to_date }}
+                    </td>
+
+                    <td>
+                        {{ l.number_of_days }}
+                    </td>
+
+                    <td class="leave-reason">
+                        {{ l.reason }}
+                    </td>
+
+                    <td>
+
+                        <span class="leave-status badge
+                            {% if l.status == 'Approved' %}
+                                text-bg-success
+                            {% elif l.status == 'Rejected' %}
+                                text-bg-danger
+                            {% else %}
+                                text-bg-warning
+                            {% endif %}
+                        ">
+                            {{ l.status }}
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        {% if l.status == 'Pending' and role != 'FACULTY' %}
+
+                        <div class="leave-actions d-flex gap-1">
+
+                            <form
+                                method="post"
+                                action="{% url 'leave_action' l.pk 'approve' %}"
+                            >
+
+                                {% csrf_token %}
+
+                                <button
+                                    type="submit"
+                                    class="approve-btn btn btn-sm btn-success"
+                                >
+                                    Approve
+                                </button>
+
+                            </form>
+
+
+                            <form
+                                method="post"
+                                action="{% url 'leave_action' l.pk 'reject' %}"
+                            >
+
+                                {% csrf_token %}
+
+                                <button
+                                    type="submit"
+                                    class="reject-btn btn btn-sm btn-outline-danger"
+                                >
+                                    Reject
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                        {% else %}
+
+                        <span class="approved-user text-muted small">
+                            {{ l.approved_by.username|default:'Waiting' }}
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+
+                {% empty %}
+
+                <tr class="empty-leave-row">
+
+                    <td
+                        colspan="7"
+                        class="text-center py-5 text-muted"
+                    >
+                        No leave requests.
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block extra_js %}
+    <script src="{% static 'js/leave/leave.js' %}"></script>
+{% endblock %}

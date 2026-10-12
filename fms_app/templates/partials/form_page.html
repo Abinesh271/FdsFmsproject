@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="form-page">
+
+  
+    <div class="page-title mb-1">
+        {{ title }}
+    </div>
+
+    <p class="text-muted mb-4">
+        Fill the form and submit to store the information in the database.
+    </p>
+
+
+    
+    <form method="post" enctype="multipart/form-data" class="card p-4">
+
+        {% csrf_token %}
+
+
+        <!-- Show general form errors -->
+        {% if form.non_field_errors %}
+
+            <div class="alert alert-danger">
+                {{ form.non_field_errors }}
+            </div>
+
+        {% endif %}
+
+
+        <!-- Display all form fields -->
+        <div class="row g-3">
+
+            {% for field in form %}
+
+                <div class="col-md-6">
+
+                    <!-- Field label -->
+                    <label class="form-label">
+
+                        {{ field.label }}
+
+                        {% if field.field.required %}
+                            <span class="text-danger">*</span>
+                        {% endif %}
+
+                    </label>
+
+
+                    <!-- Input field -->
+                    {{ field }}
+
+
+                    <!-- Show field errors -->
+                    {% for error in field.errors %}
+
+                        <div class="text-danger small">
+                            {{ error }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- Save and Cancel buttons -->
+        <div class="mt-4">
+
+            <button class="btn btn-primary">
+                <i class="bi bi-check2-circle"></i>
+                Save
+            </button>
+
+            <a href="{{ back_url }}" class="btn btn-light">
+                Cancel
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

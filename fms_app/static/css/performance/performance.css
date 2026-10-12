@@ -1,0 +1,167 @@
+
+
+.page-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #263445;
+    margin-bottom: 8px;
+}
+
+.form-page {
+    margin-bottom: 25px;
+}
+
+
+
+
+.form-page form {
+    background: #fff;
+    border: 1px solid #e3e8ef;
+    border-radius: 12px;
+}
+
+.form-page .form-label {
+    display: block;
+    font-weight: 500;
+    color: #344054;
+    margin-bottom: 6px;
+}
+
+.form-page input,
+.form-page select,
+.form-page textarea {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+}
+
+.form-page input:focus,
+.form-page select:focus,
+.form-page textarea:focus {
+    border-color: #86b7fe;
+    outline: none;
+    box-shadow: 0 0 0 3px #0d6efd20;
+}
+
+
+
+.score-preview {
+    padding: 14px;
+    background: #f8f9fa;
+    border: 1px solid #e3e8ef;
+    border-radius: 8px;
+    color: #344054;
+    font-size: 14px;
+}
+
+
+
+
+.form-page .btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+}
+
+.form-page .btn-light {
+    border: 1px solid #dee2e6;
+}
+
+
+
+
+.evaluation-card {
+    height: 100%;
+    border: 1px solid #e3e8ef;
+    border-radius: 12px;
+    background: #fff;
+}
+
+.evaluation-card .card-body {
+    padding: 20px;
+}
+
+.evaluation-card h5 {
+    margin-bottom: 6px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #263445;
+}
+
+
+/* Total score */
+
+.score {
+    font-size: 28px;
+    font-weight: 600;
+    color: #0d6efd;
+    white-space: nowrap;
+}
+
+.score small {
+    font-size: 14px;
+    font-weight: 400;
+    color: #788797;
+}
+
+
+
+
+.evaluation-card .progress {
+    background: #e9ecef;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.evaluation-card .progress-bar {
+    background: #0d6efd;
+    border-radius: 6px;
+}
+
+
+
+
+.evaluation-card .badge {
+    padding: 7px 10px;
+    font-weight: 500;
+}
+
+.evaluation-card .text-muted {
+    overflow-wrap: anywhere;
+}
+
+
+/* Delete button */
+
+.delete-form .btn {
+    border-radius: 6px;
+}
+
+
+/* Empty message card */
+
+.card.text-center {
+    border: 1px solid #e3e8ef;
+    border-radius: 12px;
+}
+
+
+/* Mobile screen */
+
+@media (max-width: 767px) {
+    .page-title {
+        font-size: 21px;
+    }
+
+    .form-page form {
+        padding: 18px !important;
+    }
+
+    .evaluation-card .card-body {
+        padding: 16px;
+    }
+
+    .score {
+        font-size: 24px;
+    }
+}

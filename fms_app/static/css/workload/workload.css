@@ -1,0 +1,44 @@
+/* Workload card */
+.workload-card {
+    height: 100%;
+    border-radius: 14px;
+}
+
+
+/* Total working hours box */
+.total-hours {
+    background: #eef5ff;
+    color: #246bce;
+    border-radius: 10px;
+    padding: 8px 12px;
+    text-align: center;
+}
+
+
+/* Total hours number */
+.total-hours strong {
+    display: block;
+    font-size: 22px;
+}
+
+
+/* Hours per week text */
+.total-hours span {
+    font-size: 11px;
+}
+
+
+/* Subject allocation row */
+.allocation-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid #edf0f4;
+}
+
+
+/* Remove bottom border from the last subject */
+.allocation-row:last-child {
+    border-bottom: 0;
+}

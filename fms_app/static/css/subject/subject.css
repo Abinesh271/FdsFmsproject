@@ -1,0 +1,131 @@
+
+
+.page-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #263445;
+    margin-bottom: 8px;
+}
+
+.form-page {
+    margin-bottom: 25px;
+}
+
+
+
+.form-page form.card {
+    background: #fff;
+    border: 1px solid #e3e8ef;
+    border-radius: 12px;
+}
+
+.form-page .form-label {
+    display: block;
+    font-weight: 500;
+    color: #344054;
+    margin-bottom: 6px;
+}
+
+.form-page input,
+.form-page select,
+.form-page textarea {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+}
+
+.form-page input:focus,
+.form-page select:focus,
+.form-page textarea:focus {
+    border-color: #86b7fe;
+    outline: none;
+    box-shadow: 0 0 0 3px #0d6efd20;
+}
+
+
+
+.form-page .btn {
+    padding: 8px 16px;
+    border-radius: 6px;
+}
+
+.form-page .btn-light {
+    border: 1px solid #dee2e6;
+}
+
+
+
+
+.card.card-body {
+    border: 1px solid #e3e8ef;
+    border-radius: 10px;
+}
+
+.card-body .form-control,
+.card-body .form-select {
+    min-height: 38px;
+    border-radius: 6px;
+}
+
+.card-body .btn {
+    border-radius: 6px;
+}
+
+
+
+.card {
+    border-color: #e3e8ef;
+    border-radius: 10px;
+}
+
+.table thead th {
+    background: #f8f9fa;
+    color: #344054;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    padding: 14px;
+}
+
+.table tbody td {
+    padding: 13px 14px;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.table tbody tr:hover {
+    background: #f8fafc;
+}
+
+.table .badge {
+    padding: 6px 10px;
+    font-weight: 500;
+}
+
+
+.table .btn {
+    border-radius: 6px;
+}
+
+.table form {
+    margin-left: 3px;
+}
+
+
+
+
+@media (max-width: 767px) {
+    .page-title {
+        font-size: 21px;
+    }
+
+    .form-page form.card {
+        padding: 18px !important;
+    }
+
+    .table thead th,
+    .table tbody td {
+        padding: 10px;
+    }
+}

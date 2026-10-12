@@ -1,0 +1,17 @@
+.report-box{
+    background:  #fff;
+    border: 1px solid rgb(247, 247, 253);
+    border-radius: 14px;
+    padding: 20px;
+}
+
+.report-box span {
+    display: block;
+    color: gray;
+}
+
+.report-box strong{
+    display: block;
+    font-size: 28px;
+    margin-top: 5px;
+}
